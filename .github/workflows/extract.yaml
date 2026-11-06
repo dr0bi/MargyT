@@ -1,0 +1,39 @@
+
+name: Extract HTML Widgets
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "margyt_html_widgets_source.zip"
+      - ".github/workflows/extract-htmlwidgets.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract ZIP
+        run: |
+          mkdir -p HtmlWidgets
+          unzip -o margyt_html_widgets_source.zip -d HtmlWidgets
+
+      - name: Commit extracted files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add HtmlWidgets
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Extract HTML Widgets plugin"
+            git push
+          else
+            echo "No changes to commit"
+          fi
