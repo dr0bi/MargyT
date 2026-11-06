@@ -32,7 +32,7 @@ public final class HtmlWidgets extends MargyPlugin {
         margyt().log("HTML Widgets loaded");
     }
 
-    @Override
+    // Not a MargyT API hook yet; kept as a helper for a future host integration.
     public boolean onOpenSettings(Activity activity) {
         if (activity == null || activity.isFinishing()) return false;
         showSettings(activity);
