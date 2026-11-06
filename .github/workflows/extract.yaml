@@ -1,11 +1,10 @@
-
-name: Extract HTML Widgets
+name: Extract MargyT
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - "margyt_html_widgets_source.zip"
+      - "margyt.zip"
       - ".github/workflows/extract-htmlwidgets.yml"
 
 permissions:
@@ -19,20 +18,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Extract ZIP
+      - name: Extract MargyT ZIP
         run: |
-          mkdir -p HtmlWidgets
-          unzip -o margyt_html_widgets_source.zip -d HtmlWidgets
+          mkdir -p MargyT-source
+          unzip -o margyt.zip -d MargyT-source
 
       - name: Commit extracted files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add HtmlWidgets
+          git add MargyT-source
 
           if ! git diff --cached --quiet; then
-            git commit -m "Extract HTML Widgets plugin"
+            git commit -m "Extract MargyT plugin SDK"
             git push
           else
             echo "No changes to commit"
