@@ -1,0 +1,49 @@
+name: Build Profile Card
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "ProfileCard/**"
+      - ".github/workflows/build-profilecard.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out plugin source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Get MargyT build tools
+        run: git clone --depth 1 https://github.com/xzwew/MargyT.git MargyT
+
+      - name: Build Profile Card
+        working-directory: MargyT
+        run: |
+          mkdir -p examples/profilecard
+          cp -R ../ProfileCard/. examples/profilecard/
+          python3 -m margyt.plugin examples/profilecard
+          mkdir -p ../dist
+          cp examples/profilecard/*.mtp ../dist/
+          test -n "$(find ../dist -name '*.mtp' -print -quit)"
+
+      - name: Upload plugin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Profile-Card
+          path: dist/*.mtp
+          if-no-files-found: error
