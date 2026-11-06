@@ -1,0 +1,11 @@
+{
+  "id": "margyt.htmlwidgets",
+  "name": "HTML Widgets",
+  "name_ru": "HTML-виджеты",
+  "version": "0.1.0",
+  "author": "Your name",
+  "description": "Loads local HTML projects inside TikTok using WebView.",
+  "description_ru": "Загружает локальные HTML-проекты внутри TikTok через WebView.",
+  "entry": "cat.narezany.htmlwidgets.HtmlWidgets",
+  "min_api": 3
+}
