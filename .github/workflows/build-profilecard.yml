@@ -28,8 +28,13 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Get MargyT build tools
+      - name: Get MargyT plugin build tools
         run: git clone --depth 1 https://github.com/xzwew/MargyT.git MargyT
+
+      - name: Use the API 5 from this MargyT source
+        run: |
+          mkdir -p MargyT/inject/java/cat/narezany/margyt/plugin
+          cp ProfileCard/api/cat/narezany/margyt/plugin/*.java MargyT/inject/java/cat/narezany/margyt/plugin/
 
       - name: Build Profile Card
         working-directory: MargyT
