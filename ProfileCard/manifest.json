@@ -1,0 +1,11 @@
+{
+  "id": "margyt.profilecard",
+  "name": "Profile Card",
+  "name_ru": "Карточка профиля",
+  "version": "1.0.0",
+  "author": "dr0bi",
+  "description": "Create and preview a custom profile card with banner, avatar and stats.",
+  "description_ru": "Создаёт карточку профиля с баннером, аватаркой и статистикой.",
+  "entry": "cat.narezany.profilecard.ProfileCard",
+  "min_api": 5
+}
